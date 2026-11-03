@@ -1,45 +1,22 @@
 import { Head, Link } from '@inertiajs/react';
 
-interface Adoption {
-  id: number;
-  adoption_fee: number;
-  approval_status: string;
-  adoption_date: string | null;
-  shelter_animal: {
-    pet_name: string;
-    animal_type: string;
-    microchip_id: string;
-  };
-  adopter: {
-    name: string;
-    phone: string;
-  };
-}
-
-interface Props {
-  adoptions: {
-    data: Adoption[];
-    links: any;
-  };
-}
-
-export default function Index({ adoptions }: Props) {
+export default function Index({ adoptions }: any) {
   return (
     <>
       <Head title="Adoptions" />
 
-      <div className="max-w-7xl mx-auto py-8 px-4">
+      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Adoption Records</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Adoption Records</h1>
           <Link
-            href={route('adoptions.create')}
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm"
+            href="/adoptions/create"
+            className="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700"
           >
-            + New Adoption Request
+            + New Adoption
           </Link>
         </div>
 
-        <div className="bg-white shadow rounded-lg overflow-hidden">
+        <div className="bg-white overflow-hidden shadow rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -55,20 +32,18 @@ export default function Index({ adoptions }: Props) {
             <tbody className="bg-white divide-y divide-gray-200">
               {adoptions.data.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-10 text-center text-gray-500">
+                  <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
                     No adoption records found.
                   </td>
                 </tr>
               ) : (
-                adoptions.data.map((adoption) => (
-                  <tr key={adoption.id} className="hover:bg-gray-50">
+                adoptions.data.map((adoption: any) => (
+                  <tr key={adoption.id}>
                     <td className="px-6 py-4">
                       <div className="font-medium">{adoption.shelter_animal?.pet_name}</div>
                       <div className="text-sm text-gray-500">{adoption.shelter_animal?.animal_type}</div>
                     </td>
-                    <td className="px-6 py-4 font-mono text-sm">
-                      {adoption.shelter_animal?.microchip_id}
-                    </td>
+                    <td className="px-6 py-4 font-mono text-sm">{adoption.shelter_animal?.microchip_id}</td>
                     <td className="px-6 py-4">{adoption.adopter?.name}</td>
                     <td className="px-6 py-4">{adoption.adopter?.phone}</td>
                     <td className="px-6 py-4">${Number(adoption.adoption_fee).toFixed(2)}</td>

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Municipal Animal Shelter')</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans antialiased">
     <nav class="bg-white shadow mb-8">
         <div class="max-w-7xl mx-auto px-4 py-3 flex gap-6">
             <a href="{{ url('/shelter-animals') }}" class="font-medium text-gray-700 hover:text-blue-600">Animals</a>
@@ -14,7 +14,7 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         @yield('content')
     </main>
 </body>

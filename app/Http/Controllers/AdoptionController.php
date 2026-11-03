@@ -21,14 +21,11 @@ class AdoptionController extends Controller
      */
     public function index(Request $request)
 {
-    $adoptions = Adoption::with(['shelterAnimal', 'adopter'])
+    $adoptions = \App\Models\Adoption::with(['shelterAnimal', 'adopter'])
         ->orderByDesc('created_at')
-        ->paginate(15)
-        ->withQueryString();
+        ->paginate(15);
 
-    return Inertia::render('Adoptions/Index', [
-        'adoptions' => $adoptions,
-    ]);
+    return view('adoptions.index', compact('adoptions'));
 }
 
     /**
